@@ -1,7 +1,14 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin on the JVM.
-    id("org.jetbrains.kotlin.jvm").version("1.3.21")
-    id("c")
+    id("org.jetbrains.kotlin.jvm").version("1.3.60")
+
+    // Apply the application plugin to add support for building a CLI application.
+    application
+
+    // Shadow Jar
+    id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
 repositories {
@@ -20,20 +27,11 @@ dependencies {
     // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 
-    compile(files("/home/mattmoore/source/kotlin-examples/jni/libhello.so"))
+    // Java TensorFlow API
+    implementation("org.tensorflow:tensorflow:1.14.0")
 }
 
-tasks {
-  test {
-    // systemProperty("java.library.path", "/home/mattmoore/source/kotlin-examples/jni/libhello.so")
-    systemProperty("java.library.path", file("${buildDir}/libs/hello/shared").absolutePath)
-  }
-
-  model {
-    components {
-      hello(NativeExecutableSpec)
-    }
-  }
+application {
+    // Define the main class for the application.
+    mainClassName = "io.mattmoore.kotlin.tensorflow.MainKt"
 }
-
-test.dependsOn("helloSharedLibrary")
