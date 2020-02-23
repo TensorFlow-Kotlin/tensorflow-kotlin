@@ -1,4 +1,4 @@
-package io.mattmoore.kotlin.tensorflow
+package io.mattmoore.tensorflow
 
 import org.tensorflow.*
 import java.nio.file.Files
@@ -6,9 +6,9 @@ import java.nio.file.Paths
 import java.util.*
 
 fun graphExample() {
-    Graph().use { g ->
+    org.tensorflow.Graph().use { g ->
         val value = "Hello from " + TensorFlow.version()
-        Tensor.create(value.toByteArray(charset("UTF-8"))).use { t ->
+        org.tensorflow.Tensor.create(value.toByteArray(charset("UTF-8"))).use { t ->
             // The Java API doesn't yet include convenience functions for adding operations.
             g.opBuilder("Const", "MyConst").setAttr("dtype", t.dataType()).setAttr("value", t).build()
         }
@@ -25,7 +25,7 @@ fun train(args: Array<String>) {
     val graphDef = Files.readAllBytes(Paths.get(args[0]))
     val checkpointDir = args[1]
     val checkpointExists = Files.exists(Paths.get(checkpointDir))
-    Graph().use { graph ->
+    org.tensorflow.Graph().use { graph ->
         Session(graph).use { sess ->
             Tensors.create(Paths.get(checkpointDir, "ckpt").toString()).use { checkpointPrefix ->
                 graph.importGraphDef(graphDef)
@@ -74,7 +74,7 @@ fun train(args: Array<String>) {
     }
 }
 
-private fun printVariables(sess: Session) {
+private fun printVariables(sess: org.tensorflow.Session) {
     val values = sess.runner().fetch("W/read").fetch("b/read").run()
     System.out.printf("W = %f\tb = %f\n", values[0].floatValue(), values[1].floatValue())
     for (t in values) {

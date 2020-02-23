@@ -1,4 +1,4 @@
-package io.mattmoore.kotlin.tensorflow
+package io.mattmoore.tensorflow
 
 fun main(args: Array<String>) {
     train(args)

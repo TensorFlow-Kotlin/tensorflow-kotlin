@@ -15,20 +15,30 @@ repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+    mavenCentral()
+    maven {
+        url = uri("https://mvnrepository.com/artifact/cisd/jhdf5")
+    }
 }
 
 dependencies {
     // Use the Kotlin JDK 8 standard library.
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-    // Use the Kotlin test library.
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    // Kotest
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.0")
 
-    // Use the Kotlin JUnit integration.
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+//    // Use the Kotlin test library.
+//    testImplementation("org.jetbrains.kotlin:kotlin-test")
+//
+//    // Use the Kotlin JUnit integration.
+//    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 
     // Java TensorFlow API
     implementation("org.tensorflow:tensorflow:1.14.0")
+
+//    // Java library for HDF5 files. Used for writing models to file.
+//    implementation("cisd:jhdf5:14.12.6")
 }
 
 application {
