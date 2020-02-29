@@ -16,9 +16,6 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
     mavenCentral()
-    maven {
-        url = uri("https://mvnrepository.com/artifact/cisd/jhdf5")
-    }
 }
 
 dependencies {
@@ -27,12 +24,6 @@ dependencies {
 
     // Kotest
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.0")
-
-//    // Use the Kotlin test library.
-//    testImplementation("org.jetbrains.kotlin:kotlin-test")
-//
-//    // Use the Kotlin JUnit integration.
-//    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 
     // Java TensorFlow API
     implementation("org.tensorflow:tensorflow:1.14.0")
