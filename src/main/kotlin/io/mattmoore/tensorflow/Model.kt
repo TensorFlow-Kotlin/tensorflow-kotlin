@@ -18,12 +18,14 @@ class Model(graphDef: ByteArray) {
         return outputBuffer
     }
 
-    fun run(lambda: (session: Session) -> Unit) {
-        Graph().use { g ->
+    fun run(lambda: (session: Session) -> FloatArray): List<Float> {
+        lateinit var result: FloatArray
+        return Graph().use { g ->
             g.importGraphDef(graphDef)
             Session(g).use { session ->
-                lambda(session)
+                result = lambda(session)
             }
+            result.toList()
         }
     }
 
@@ -31,10 +33,6 @@ class Model(graphDef: ByteArray) {
         fun load(file: String): Model {
             val graphDef = File(file).readBytes()
             return Model(graphDef)
-        }
-
-        fun save(file: String) {
-
         }
     }
 }

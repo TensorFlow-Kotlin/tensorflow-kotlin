@@ -2,7 +2,7 @@ package io.mattmoore.tensorflow
 
 fun main(args: Array<String>) {
     val model = Model.load("models/simple.pb")
-    model.run { session ->
+    val result = model.run { session ->
         val inputData = arrayOf(floatArrayOf(4f, 3f, 2f, 1f))
         // We have to create tensor to feed it to session,
         // unlike in Python where you just pass Numpy array
@@ -11,5 +11,7 @@ fun main(args: Array<String>) {
         for (element in output[0]) {
             println(element) //should be 41. 51.5 62.
         }
+        output[0]
     }
+    println("Results: ${result}")
 }
