@@ -33,6 +33,9 @@ dependencies {
 
 //    // Java library for HDF5 files. Used for writing models to file.
 //    implementation("cisd:jhdf5:14.12.6")
+
+    // SLF4J
+    implementation("org.slf4j:slf4j-simple:1.7.30")
 }
 
 application {

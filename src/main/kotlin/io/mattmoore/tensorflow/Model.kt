@@ -1,12 +1,16 @@
 package io.mattmoore.tensorflow
 
+import org.tensorflow.Graph
 import org.tensorflow.Session
+import org.tensorflow.Tensor
+
+import java.io.File
 
 class Model(graphDef: ByteArray) {
     var graphDef: ByteArray = graphDef
 
-    fun predict(sess: Session, inputTensor: org.tensorflow.Tensor<*>): Array<FloatArray> {
-        val result: org.tensorflow.Tensor<*> = sess.runner()
+    fun predict(sess: Session, inputTensor: Tensor<*>): Array<FloatArray> {
+        val result: Tensor<*> = sess.runner()
                 .feed("input", inputTensor)
                 .fetch("not_activated_output").run().get(0)
         val outputBuffer = Array(1) { FloatArray(3) }
@@ -14,10 +18,10 @@ class Model(graphDef: ByteArray) {
         return outputBuffer
     }
 
-    fun run(lambda: (session: org.tensorflow.Session) -> Unit) {
-        org.tensorflow.Graph().use { g ->
+    fun run(lambda: (session: Session) -> Unit) {
+        Graph().use { g ->
             g.importGraphDef(graphDef)
-            org.tensorflow.Session(g).use { session ->
+            Session(g).use { session ->
                 lambda(session)
             }
         }
@@ -25,7 +29,7 @@ class Model(graphDef: ByteArray) {
 
     companion object {
         fun load(file: String): Model {
-            val graphDef = java.io.File(file).readBytes()
+            val graphDef = File(file).readBytes()
             return Model(graphDef)
         }
 
