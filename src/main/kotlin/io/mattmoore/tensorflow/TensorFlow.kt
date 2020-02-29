@@ -1,9 +1,8 @@
 package io.mattmoore.tensorflow
 
-import org.tensorflow.*
-import java.nio.file.Files
-import java.nio.file.Paths
-import java.util.*
+import org.tensorflow.Session
+import org.tensorflow.TensorFlow
+
 
 fun graphExample() {
     org.tensorflow.Graph().use { g ->
@@ -16,68 +15,29 @@ fun graphExample() {
     }
 }
 
-// Training a trivial linear model.
-fun train(args: Array<String>) {
-    if (args.size != 2) {
-        System.err.println("Require two arguments: The GraphDef file and checkpoint directory")
-        System.exit(1)
-    }
-    val graphDef = Files.readAllBytes(Paths.get(args[0]))
-    val checkpointDir = args[1]
-    val checkpointExists = Files.exists(Paths.get(checkpointDir))
-    org.tensorflow.Graph().use { graph ->
-        Session(graph).use { sess ->
-            Tensors.create(Paths.get(checkpointDir, "ckpt").toString()).use { checkpointPrefix ->
-                graph.importGraphDef(graphDef)
-                // Initialize or restore.
-                // The names of the tensors in the graph are printed out by the program
-                // that created the graph:
-                // https://github.com/tensorflow/models/blob/master/samples/languages/java/training/model/create_graph.py
-                if (checkpointExists) {
-                    sess.runner().feed("save/Const", checkpointPrefix).addTarget("save/restore_all").run()
-                } else {
-                    sess.runner().addTarget("init").run()
-                }
-                print("Starting from       : ")
-                printVariables(sess)
-                // Train a bunch of times.
-                // (Will be much more efficient if we sent batches instead of individual values).
-                val r = Random()
-                val NUM_EXAMPLES = 500
-                for (i in 1..5) {
-                    for (n in 0 until NUM_EXAMPLES) {
-                        val `in` = r.nextFloat()
-                        Tensors.create(`in`).use { input ->
-                            Tensors.create(3 * `in` + 2).use { target ->
-                                // Again the tensor names are from the program that created the graph.
-                                // https://github.com/tensorflow/models/blob/master/samples/languages/java/training/model/create_graph.py
-                                sess.runner().feed("input", input).feed("target", target).addTarget("train").run()
-                            }
-                        }
-                    }
-                    System.out.printf("After %5d examples: ", i * NUM_EXAMPLES)
-                    printVariables(sess)
-                }
-                // Checkpoint.
-                // The feed and target name are from the program that created the graph.
-                // https://github.com/tensorflow/models/blob/master/samples/languages/java/training/model/create_graph.py.
-                sess.runner().feed("save/Const", checkpointPrefix).addTarget("save/control_dependency").run()
-                Tensors.create(1.0f).use { input ->
-                    sess.runner().feed("input", input).fetch("output").run()[0].expect(Float::class.java).use { output ->
-                        System.out.printf(
-                                "For input %f, produced %f (ideally would produce 3*%f + 2)\n",
-                                input.floatValue(), output.floatValue(), input.floatValue())
-                    }
-                }
+fun predict(args: Array<String>) {
+    val graph = java.io.File("saved_model.pb").readBytes()
+
+    org.tensorflow.Graph().use { g ->
+        g.importGraphDef(graph)
+        org.tensorflow.Session(g).use { sess ->
+            val inputData = arrayOf(floatArrayOf(4f, 3f, 2f, 1f))
+            // We have to create tensor to feed it to session,
+            // unlike in Python where you just pass Numpy array
+            val inputTensor = org.tensorflow.Tensor.create(inputData)
+            val output: Array<FloatArray> = predict(sess, inputTensor)
+            for (i in 0 until output[0].size) {
+                println(output[0][i]) //should be 41. 51.5 62.
             }
         }
     }
 }
 
-private fun printVariables(sess: org.tensorflow.Session) {
-    val values = sess.runner().fetch("W/read").fetch("b/read").run()
-    System.out.printf("W = %f\tb = %f\n", values[0].floatValue(), values[1].floatValue())
-    for (t in values) {
-        t.close()
-    }
+fun predict(sess: Session, inputTensor: org.tensorflow.Tensor<*>): Array<FloatArray> {
+    val result: org.tensorflow.Tensor<*> = sess.runner()
+            .feed("input", inputTensor)
+            .fetch("not_activated_output").run().get(0)
+    val outputBuffer = Array(1) { FloatArray(3) }
+    result.copyTo(outputBuffer)
+    return outputBuffer
 }

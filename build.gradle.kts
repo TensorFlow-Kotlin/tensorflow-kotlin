@@ -43,5 +43,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = "io.mattmoore.kotlin.tensorflow.MainKt"
+    mainClassName = "io.mattmoore.tensorflow.MainKt"
 }
