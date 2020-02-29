@@ -11,6 +11,8 @@ plugins {
     id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
+val kotlinVersion = "1.3.60"
+
 repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
@@ -23,7 +25,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     // Kotest
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.0")
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
+//    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.0.0-BETA1")
 
     // Java TensorFlow API
     implementation("org.tensorflow:tensorflow:1.14.0")
@@ -35,4 +38,8 @@ dependencies {
 application {
     // Define the main class for the application.
     mainClassName = "io.mattmoore.tensorflow.MainKt"
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
