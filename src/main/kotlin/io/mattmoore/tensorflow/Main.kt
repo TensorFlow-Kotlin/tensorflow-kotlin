@@ -8,10 +8,7 @@ fun main(args: Array<String>) {
         // unlike in Python where you just pass Numpy array
         val inputTensor = org.tensorflow.Tensor.create(inputData)
         val output: Array<FloatArray> = model.predict(session, inputTensor)
-        for (element in output[0]) {
-            println(element) //should be 41. 51.5 62.
-        }
         output[0]
     }
-    println("Results: ${result}")
+    println("Results: ${result}") //should be 41. 51.5 62.
 }
