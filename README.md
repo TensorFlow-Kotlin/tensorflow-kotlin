@@ -8,3 +8,16 @@ Please refer to the main website https://tensorflow-kotlin.dev for documentation
 - [Documentation](https://tensorflow-kotlin.dev/docs)
 
 If you have any questions or would like to contribute, please feel free to contact the project maintainer, [Matt Moore](matt@mattmoore.io).
+
+## Developer Setup
+
+### Install TensorFlow on macOS
+
+1. `pip3 install tensorflow==1.14.0`.
+1. Get the TensorFlow JNI shared library and extract it:
+```bash
+wget <LINK FOR YOUR PLATFORM FROM https://www.tensorflow.org/install/lang_java>
+tar -C /usr/local/lib/ -xvf libtensorflow_jni-cpu-darwin-x86_64-1.14.0.tar.gz
+```
+1. `git clone` this project.
+1. `./gradlew build`. To run tests: `./gradlew test`.
