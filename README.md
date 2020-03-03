@@ -6,3 +6,5 @@ Please refer to the main website https://tensorflow-kotlin.dev for documentation
 
 - [Get Started](https://tensorflow-kotlin.dev/get-started)
 - [Documentation](https://tensorflow-kotlin.dev/docs)
+
+If you have any questions or would like to contribute, please feel free to contact the project maintainer, [Matt Moore](matt@mattmoore.io).
