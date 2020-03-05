@@ -9,6 +9,12 @@ plugins {
 
     // Shadow Jar
     id("com.github.johnrengelman.shadow") version "5.2.0"
+
+    // Maven publish
+    `maven-publish`
+
+    // Bintray
+    id("com.jfrog.bintray") version "1.8.4"
 }
 
 val kotlinVersion = "1.3.60"
@@ -46,3 +52,12 @@ application {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+//bintray {
+//    user = "mattmoore"
+//    key = "bintray_api_key"
+////    pkg {
+////        name = "gradle-project"
+////        licenses = ["MIT"]
+////    }
+//}
