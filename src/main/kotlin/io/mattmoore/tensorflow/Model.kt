@@ -9,24 +9,25 @@ import java.io.File
 class Model(graphDef: ByteArray) {
     var graphDef: ByteArray = graphDef
 
-    fun predict(sess: Session, inputTensor: Tensor<*>): Array<FloatArray> {
+    fun predict(inputData: Array<FloatArray>): List<Float> {
+        lateinit var output: Array<FloatArray>
+        return Graph().use { g ->
+            g.importGraphDef(graphDef)
+            Session(g).use { session ->
+                val inputTensor = Tensor.create(inputData)
+                output = run(session, inputTensor)
+            }
+            output[0].toList()
+        }
+    }
+
+    private fun run(sess: Session, inputTensor: Tensor<*>): Array<FloatArray> {
         val result: Tensor<*> = sess.runner()
                 .feed("input", inputTensor)
                 .fetch("not_activated_output").run().get(0)
         val outputBuffer = Array(1) { FloatArray(3) }
         result.copyTo(outputBuffer)
         return outputBuffer
-    }
-
-    fun run(lambda: (session: Session) -> FloatArray): List<Float> {
-        lateinit var result: FloatArray
-        return Graph().use { g ->
-            g.importGraphDef(graphDef)
-            Session(g).use { session ->
-                result = lambda(session)
-            }
-            result.toList()
-        }
     }
 
     companion object {
