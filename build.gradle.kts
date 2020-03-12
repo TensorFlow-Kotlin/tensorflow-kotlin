@@ -1,4 +1,4 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+//import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin on the JVM.
@@ -8,7 +8,7 @@ plugins {
     application
 
     // Shadow Jar
-    id("com.github.johnrengelman.shadow") version "5.2.0"
+//    id("com.github.johnrengelman.shadow") version "5.2.0"
 
     // Maven publish
     `maven-publish`
@@ -53,11 +53,25 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-//bintray {
-//    user = "mattmoore"
-//    key = "bintray_api_key"
-////    pkg {
-////        name = "gradle-project"
-////        licenses = ["MIT"]
-////    }
-//}
+publishing {
+    publications {
+        create<MavenPublication>("tensorflow-kotlin") {
+            from(components["java"])
+            groupId = "io.mattmoore"
+            artifactId = "tensorflow-kotlin"
+            version = "0.1.0"
+        }
+    }
+}
+
+bintray {
+    user = System.getenv("BINTRAY_USER")
+    key = System.getenv("BINTRAY_KEY")
+    setPublications("tensorflow-kotlin")
+    pkg.apply {
+        repo = "tensorflow-kotlin"
+        name = "tensorflow-kotlin"
+        setLicenses("MIT")
+        vcsUrl = "https://github.com/TensorFlow-Kotlin/tensorflow-kotlin.git"
+    }
+}
