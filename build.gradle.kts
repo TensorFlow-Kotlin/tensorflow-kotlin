@@ -18,6 +18,8 @@ plugins {
 }
 
 val kotlinVersion = "1.3.60"
+val tensorflowVersion = "1.14.0"
+val libraryVersion = "${tensorflowVersion}-0.1.0"
 
 repositories {
     // Use jcenter for resolving your dependencies.
@@ -35,7 +37,7 @@ dependencies {
 //    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.0.0-BETA1")
 
     // Java TensorFlow API
-    implementation("org.tensorflow:tensorflow:1.14.0")
+    implementation("org.tensorflow:tensorflow:$tensorflowVersion")
 
 //    // Java library for HDF5 files. Used for writing models to file.
 //    implementation("cisd:jhdf5:14.12.6")
@@ -59,7 +61,7 @@ publishing {
             from(components["java"])
             groupId = "io.mattmoore"
             artifactId = "tensorflow-kotlin"
-            version = "1.14.0"
+            version = libraryVersion
         }
     }
 }
@@ -73,5 +75,8 @@ bintray {
         name = "tensorflow-kotlin"
         setLicenses("MIT")
         vcsUrl = "https://github.com/TensorFlow-Kotlin/tensorflow-kotlin.git"
+        version.apply {
+            name = libraryVersion
+        }
     }
 }
