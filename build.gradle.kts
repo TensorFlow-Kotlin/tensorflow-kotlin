@@ -59,7 +59,7 @@ publishing {
             from(components["java"])
             groupId = "io.mattmoore"
             artifactId = "tensorflow-kotlin"
-            version = "0.1.0"
+            version = "1.14.0"
         }
     }
 }
