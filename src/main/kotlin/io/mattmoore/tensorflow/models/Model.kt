@@ -1,4 +1,4 @@
-package io.mattmoore.tensorflow
+package io.mattmoore.tensorflow.models
 
 import org.tensorflow.Graph
 import org.tensorflow.Session

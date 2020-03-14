@@ -1,7 +1,8 @@
-package io.mattmoore.tensorflow
+package io.mattmoore.tensorflow.models
 
 import io.kotlintest.shouldBe
 import io.kotlintest.specs.StringSpec
+import io.mattmoore.tensorflow.models.Model
 
 class ModelTests: StringSpec({
     "makes a prediction from trained model" {
