@@ -68,7 +68,7 @@ publishing {
 
 bintray {
     user = System.getenv("BINTRAY_USER")
-    key = System.getenv("BINTRAY_KEY")
+    key = System.getenv("BINTRAY_PASS")
     setPublications("tensorflow-kotlin")
     pkg.apply {
         repo = "tensorflow-kotlin"
