@@ -26,6 +26,7 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
     mavenCentral()
+    maven(url = "https://dl.bintray.com/mattmoore/kimage")
 }
 
 dependencies {
@@ -38,6 +39,9 @@ dependencies {
 
     // Java TensorFlow API
     implementation("org.tensorflow:tensorflow:$tensorflowVersion")
+
+    // KImage
+    implementation("io.mattmoore:kimage:0.1.0")
 
 //    // Java library for HDF5 files. Used for writing models to file.
 //    implementation("cisd:jhdf5:14.12.6")
