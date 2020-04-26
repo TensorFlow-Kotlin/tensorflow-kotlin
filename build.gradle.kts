@@ -2,7 +2,7 @@
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin on the JVM.
-    id("org.jetbrains.kotlin.jvm").version("1.3.60")
+    id("org.jetbrains.kotlin.jvm") version "1.3.70"
 
     // Apply the application plugin to add support for building a CLI application.
     application
@@ -33,8 +33,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     // Kotest
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
-//    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.0.0-BETA1")
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.0.4")
 
     // Java TensorFlow API
     implementation("org.tensorflow:tensorflow:$tensorflowVersion")
