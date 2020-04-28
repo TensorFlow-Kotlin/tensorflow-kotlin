@@ -18,7 +18,7 @@ plugins {
 }
 
 val kotlinVersion = "1.3.60"
-val tensorflowVersion = "1.14.0"
+val tensorflowVersion = "1.15.0"
 val libraryVersion = "${tensorflowVersion}-0.1.0"
 
 repositories {

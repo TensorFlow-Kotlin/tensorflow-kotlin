@@ -5,6 +5,6 @@ import io.kotest.matchers.shouldBe
 
 class TensorFlowTests: StringSpec({
     "returns the TensorFlow version" {
-        TensorFlow.version() shouldBe "1.14.0"
+        TensorFlow.version() shouldBe "1.15.0"
     }
 })
