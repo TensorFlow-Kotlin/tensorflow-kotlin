@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin on the JVM.
     id("org.jetbrains.kotlin.jvm") version "1.3.70"
@@ -10,6 +12,14 @@ plugins {
 
     // Bintray
     id("com.jfrog.bintray") version "1.8.4"
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
 
 val tensorflowVersion = "1.15.0"
@@ -27,7 +37,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     // Kotest
-    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.0.4")
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.0.5")
 
     // Java TensorFlow API
     implementation("org.tensorflow:tensorflow:$tensorflowVersion")
@@ -42,10 +52,6 @@ dependencies {
 application {
     // Define the main class for the application.
     mainClassName = "io.mattmoore.tensorflow.MainKt"
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }
 
 publishing {
