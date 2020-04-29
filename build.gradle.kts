@@ -7,9 +7,6 @@ plugins {
     // Apply the application plugin to add support for building a CLI application.
     application
 
-    // Shadow Jar
-//    id("com.github.johnrengelman.shadow") version "5.2.0"
-
     // Maven publish
     `maven-publish`
 
