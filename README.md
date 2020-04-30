@@ -17,7 +17,7 @@ I am currently examining the best way to design this project. While my focus her
 
 ### Not Just TensorFlow
 
-Additionally, while this project is all about bringing TensorFlow to Kotlin, My ultimate goal is to build a full ML tool, including functionality for preparing and managing your data. Likely this repo will focus on the core TensorFlow capabilities and I will probably spin up another repo for the rest of the ML toolkit to make use of this library.
+Additionally, while this project is all about bringing TensorFlow to Kotlin, my ultimate goal is to build a full ML tool, including functionality for preparing and managing your data. Likely this repo will focus on the core TensorFlow capabilities and I will probably spin up another repo for the rest of the ML toolkit to make use of this library.
 
 ## Developer Setup
 
