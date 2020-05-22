@@ -1,4 +1,4 @@
-package io.mattmoore.tensorflow.model.plugin
+package dev.tfkotlin.model.plugin
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project

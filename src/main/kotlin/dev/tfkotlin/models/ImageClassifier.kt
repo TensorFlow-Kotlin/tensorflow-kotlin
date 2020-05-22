@@ -1,4 +1,4 @@
-package io.mattmoore.tensorflow.models
+package dev.tfkotlin.models
 
 class ImageClassifier {
     companion object {

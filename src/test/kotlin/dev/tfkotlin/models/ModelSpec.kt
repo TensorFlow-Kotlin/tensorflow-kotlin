@@ -1,4 +1,4 @@
-package io.mattmoore.tensorflow.models
+package dev.tfkotlin.models
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.*

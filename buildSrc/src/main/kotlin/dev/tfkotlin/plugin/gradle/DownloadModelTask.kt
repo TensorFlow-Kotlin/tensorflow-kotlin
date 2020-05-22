@@ -1,4 +1,4 @@
-package io.mattmoore.tensorflow.model.plugin
+package dev.tfkotlin.model.plugin
 
 import okhttp3.OkHttpClient
 import okhttp3.Request

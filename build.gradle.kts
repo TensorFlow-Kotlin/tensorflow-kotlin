@@ -54,14 +54,14 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = "io.mattmoore.tensorflow.MainKt"
+    mainClassName = "dev.tfkotlin.MainKt"
 }
 
 publishing {
     publications {
         create<MavenPublication>("tensorflow-kotlin") {
             from(components["java"])
-            groupId = "io.mattmoore"
+            groupId = "dev.tfkotlin"
             artifactId = "tensorflow-kotlin"
             version = libraryVersion
         }
@@ -83,7 +83,7 @@ bintray {
     }
 }
 
-tasks.named<io.mattmoore.tensorflow.model.plugin.DownloadModelTask>("downloadModel") {
+tasks.named<dev.tfkotlin.model.plugin.DownloadModelTask>("downloadModel") {
     sourceUrl = "https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite"
     target = "models/123_posenet_model.tflite"
 }
