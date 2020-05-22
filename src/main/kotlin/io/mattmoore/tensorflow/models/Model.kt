@@ -21,19 +21,19 @@ class Model(graphDef: ByteArray) {
         }
     }
 
-    private fun run(sess: Session, inputTensor: Tensor<*>): Array<FloatArray> {
-        val result: Tensor<*> = sess.runner()
-                .feed("input", inputTensor)
-                .fetch("not_activated_output").run().get(0)
-        val outputBuffer = Array(1) { FloatArray(3) }
-        result.copyTo(outputBuffer)
-        return outputBuffer
-    }
-
     companion object {
         fun load(file: String): Model {
             val graphDef = File(file).readBytes()
             return Model(graphDef)
         }
+    }
+
+    private fun run(session: Session, inputTensor: Tensor<*>): Array<FloatArray> {
+        val result: Tensor<*> = session.runner()
+                .feed("input", inputTensor)
+                .fetch("not_activated_output").run()[0]
+        val outputBuffer = Array(1) { FloatArray(3) }
+        result.copyTo(outputBuffer)
+        return outputBuffer
     }
 }
