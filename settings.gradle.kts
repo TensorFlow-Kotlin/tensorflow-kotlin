@@ -7,4 +7,4 @@
  * in the user manual at https://docs.gradle.org/5.4.1/userguide/multi_project_builds.html
  */
 
-rootProject.name = "io.mattmoore.tensorflow"
+rootProject.name = "dev.tfkotlin"

@@ -1,4 +1,4 @@
-package io.mattmoore.tensorflow
+package dev.tfkotlin
 
 class Session(graph: Graph) {
 }

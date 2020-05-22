@@ -1,6 +1,6 @@
-package io.mattmoore.tensorflow
+package dev.tfkotlin
 
-import io.mattmoore.tensorflow.models.Model
+import dev.tfkotlin.models.Model
 
 fun main(args: Array<String>) {
     val model = Model.load("models/simple.pb")
