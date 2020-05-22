@@ -3,9 +3,7 @@ package io.mattmoore.tensorflow.models
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-import io.mattmoore.tensorflow.models.Model
-
-class ModelTests: StringSpec({
+class ModelSpec: StringSpec({
     "makes a prediction from trained model" {
         val model = Model.load("models/simple.pb")
         val inputData = arrayOf(floatArrayOf(4f, 3f, 2f, 1f))
