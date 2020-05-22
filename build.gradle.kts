@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     // Apply the Kotlin JVM plugin to add support for Kotlin on the JVM.
-    id("org.jetbrains.kotlin.jvm") version "1.3.61"
+    id("org.jetbrains.kotlin.jvm")
 
     // Apply the application plugin to add support for building a CLI application.
     application
@@ -12,6 +12,9 @@ plugins {
 
     // Bintray
     id("com.jfrog.bintray") version "1.8.4"
+
+    // model downloader
+    id("model-downloader-plugin")
 }
 
 tasks.withType<KotlinCompile> {
@@ -78,4 +81,9 @@ bintray {
             name = libraryVersion
         }
     }
+}
+
+tasks.named<io.mattmoore.tensorflow.model.plugin.DownloadModelTask>("downloadModel") {
+    sourceUrl = "https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite"
+    target = "models/123_posenet_model.tflite"
 }
