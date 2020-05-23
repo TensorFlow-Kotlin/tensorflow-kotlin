@@ -1,4 +1,4 @@
-package dev.tfkotlin
+package dev.tfk
 
 class Session(graph: Graph) {
 }

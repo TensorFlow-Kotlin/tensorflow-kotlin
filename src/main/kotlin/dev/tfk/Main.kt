@@ -1,6 +1,6 @@
-package dev.tfkotlin
+package dev.tfk
 
-import dev.tfkotlin.models.Model
+import dev.tfk.models.Model
 
 fun main(args: Array<String>) {
     val model = Model.load("models/simple.pb")

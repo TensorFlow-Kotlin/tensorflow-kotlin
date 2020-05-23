@@ -1,4 +1,4 @@
-package dev.tfkotlin.model.plugin
+package dev.tfk.model.plugin
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project

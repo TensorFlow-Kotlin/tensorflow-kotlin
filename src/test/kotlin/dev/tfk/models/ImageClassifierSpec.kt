@@ -1,4 +1,4 @@
-package dev.tfkotlin.models
+package dev.tfk.models
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe

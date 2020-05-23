@@ -1,4 +1,4 @@
-package dev.tfkotlin.models
+package dev.tfk.models
 
 import org.tensorflow.Graph
 import org.tensorflow.Session

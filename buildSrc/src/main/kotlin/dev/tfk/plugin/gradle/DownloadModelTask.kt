@@ -1,4 +1,4 @@
-package dev.tfkotlin.model.plugin
+package dev.tfk.model.plugin
 
 import okhttp3.OkHttpClient
 import okhttp3.Request

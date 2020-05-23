@@ -1,4 +1,4 @@
-package dev.tfkotlin
+package dev.tfk
 
 class Graph(graphDef: ByteArray) {
 }

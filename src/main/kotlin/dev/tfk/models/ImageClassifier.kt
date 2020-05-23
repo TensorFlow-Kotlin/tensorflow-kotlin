@@ -1,4 +1,4 @@
-package dev.tfkotlin.models
+package dev.tfk.models
 
 class ImageClassifier {
     companion object {

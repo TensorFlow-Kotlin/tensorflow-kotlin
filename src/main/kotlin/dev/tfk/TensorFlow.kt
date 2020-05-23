@@ -1,4 +1,4 @@
-package dev.tfkotlin
+package dev.tfk
 
 import org.tensorflow.TensorFlow.version
 

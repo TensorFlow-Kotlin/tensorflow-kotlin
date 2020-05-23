@@ -13,7 +13,7 @@ kotlinDslPluginOptions {
     experimentalWarning.set(false)
 }
 
-group = "dev.tfkotlin.plugin"
+group = "dev.tfk.plugin"
 version = "1.0"
 
 dependencies {
@@ -26,7 +26,7 @@ gradlePlugin {
     plugins {
         register("ModelDownloader") {
             id = "model-downloader-plugin"
-            implementationClass = "dev.tfkotlin.model.plugin.TensorflowModelDownloaderPlugin"
+            implementationClass = "dev.tfk.model.plugin.TensorflowModelDownloaderPlugin"
         }
     }
 }
