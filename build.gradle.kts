@@ -68,6 +68,11 @@ publishing {
     }
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 bintray {
     user = System.getenv("BINTRAY_USER")
     key = System.getenv("BINTRAY_PASS")
