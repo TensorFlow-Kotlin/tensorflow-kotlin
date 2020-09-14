@@ -1,0 +1,34 @@
+# This workflow will build a docker container, publish it to Google Container Registry, and deploy it to GKE.
+#
+# To configure this workflow:
+#
+# 1. Ensure that your repository contains the necessary configuration for your Google Kubernetes Engine cluster, including deployment.yml, kustomization.yml, service.yml, etc.
+#
+# 2. Set up secrets in your workspace: GKE_PROJECT with the name of the project, GKE_EMAIL with the service account email, GKE_KEY with the Base64 encoded JSON service account key (https://github.com/GoogleCloudPlatform/github-actions/tree/docs/service-account-key/setup-gcloud#inputs).
+#
+# 3. Change the values for the GKE_ZONE, GKE_CLUSTER, IMAGE, REGISTRY_HOSTNAME and DEPLOYMENT_NAME environment variables (below).
+
+name: Validate Pull Request
+on: push
+
+jobs:
+  setup-build-test:
+    name: Setup, Build, Test
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Cache Gradle so it doesn't have to download for every run
+      - name: Gradle Cache
+        uses: actions/cache@v1
+        env:
+          cache-name: gradle
+        with:
+          path: ~/.gradle
+          key: gradle
+
+      - name: Execute Tests
+        run: |
+          ./gradlew clean test
