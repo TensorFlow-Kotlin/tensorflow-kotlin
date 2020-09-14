@@ -1,5 +1,7 @@
 # TensorFlow Kotlin
 
+![Build Status](https://github.com/TensorFlow-Kotlin/tensorflow-kotlin/workflows/Validate%20Pull%20Request/badge.svg)
+
 This library is a Kotlin API for https://www.tensorflow.org. It attempts to provide most of the functionality provided by the official Python API, while at the same type being strongly-typed and adding some new features. It is a work in progress and primarily for research purposes.
 
 Please refer to the main website https://tensorflow-kotlin.dev for documentation and tutorials. Here are some useful links to get started:
