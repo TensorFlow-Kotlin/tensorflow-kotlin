@@ -14,7 +14,7 @@ class ModelSpec : DescribeSpec({
 
   describe("predict") {
     val model = Model.load("models/simple.pb")
-    val inputData = arrayOf(floatArrayOf(4f, 3f, 2f, 1f))
+    val inputData = listOf(4f, 3f, 2f, 1f)
     val prediction = model.predict(inputData)
 
     it("should make a prediction") {
