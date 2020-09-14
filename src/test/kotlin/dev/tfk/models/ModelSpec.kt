@@ -1,7 +1,8 @@
 package dev.tfk.models
 
 import io.kotest.core.spec.style.DescribeSpec
-import io.kotest.matchers.*
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 
 class ModelSpec : DescribeSpec({
   describe("load") {
@@ -14,11 +15,11 @@ class ModelSpec : DescribeSpec({
 
   describe("predict") {
     val model = Model.load("models/simple.pb")
-    val inputData = arrayOf(floatArrayOf(4f, 3f, 2f, 1f))
+    val inputData = arrayOf(arrayOf(4f, 3f, 2f, 1f))
     val prediction = model.predict(inputData)
 
     it("should make a prediction") {
-      prediction shouldBe listOf(41.0f, 51.5f, 62.0f)
+      prediction shouldBe arrayOf(41.0f, 51.5f, 62.0f)
     }
   }
 })

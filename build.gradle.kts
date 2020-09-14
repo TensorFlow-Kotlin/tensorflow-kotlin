@@ -9,6 +9,9 @@ plugins {
   // Apply the application plugin to add support for building a CLI application.
   application
 
+  // Shadow Jar
+  id("com.github.johnrengelman.shadow") version "6.0.0"
+
   // Maven publish
   `maven-publish`
 
@@ -28,7 +31,7 @@ tasks.withType<Test> {
   useJUnitPlatform()
 }
 
-val tensorflowVersion = "1.15.0"
+val tensorflowVersion = "0.2.0-SNAPSHOT"
 val libraryVersion = "${tensorflowVersion}-0.1.0-SNAPSHOT"
 group = "dev.tfk"
 version = libraryVersion
@@ -38,6 +41,7 @@ repositories {
   // You can declare any Maven/Ivy/file repository here.
   jcenter()
   mavenCentral()
+  maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
 }
 
 dependencies {
@@ -48,7 +52,9 @@ dependencies {
   testImplementation("io.kotest:kotest-runner-junit5-jvm:4.0.5")
 
   // Java TensorFlow API
-  implementation("org.tensorflow:tensorflow:$tensorflowVersion")
+  implementation("org.tensorflow:tensorflow-core-platform:$tensorflowVersion")
+  implementation("org.tensorflow:tensorflow-framework:$tensorflowVersion")
+  implementation("org.tensorflow:ndarray:$tensorflowVersion")
 
 //    // Java library for HDF5 files. Used for writing models to file.
 //    implementation("cisd:jhdf5:14.12.6")

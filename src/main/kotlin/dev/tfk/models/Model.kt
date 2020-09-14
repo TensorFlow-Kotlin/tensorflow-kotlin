@@ -3,37 +3,33 @@ package dev.tfk.models
 import org.tensorflow.Graph
 import org.tensorflow.Session
 import org.tensorflow.Tensor
-
+import org.tensorflow.ndarray.StdArrays
+import org.tensorflow.proto.framework.GraphDef
+import org.tensorflow.types.TFloat32
 import java.io.File
 
-class Model(graphDef: ByteArray) {
-    var graphDef: ByteArray = graphDef
+data class Model(var graphDef: ByteArray) {
+  fun predict(inputData: Array<Array<Float>>): Array<Float>? {
+    val inputTensor = TFloat32.tensorOf(StdArrays.ndCopyOf(inputData))
+    val outputTensor = run(inputTensor)?.first()!!
+    return arrayOf(
+      outputTensor.rawData().asFloats().getFloat(0),
+      outputTensor.rawData().asFloats().getFloat(1),
+      outputTensor.rawData().asFloats().getFloat(2)
+    )
+  }
 
-    fun predict(inputData: Array<FloatArray>): List<Float> {
-        lateinit var output: Array<FloatArray>
-        return Graph().use { g ->
-            g.importGraphDef(graphDef)
-            Session(g).use { session ->
-                val inputTensor = Tensor.create(inputData)
-                output = run(session, inputTensor)
-            }
-            output[0].toList()
-        }
-    }
+  private fun run(tensor: Tensor<TFloat32>): MutableList<Tensor<*>>? =
+    Session(Graph().apply { importGraphDef(GraphDef.parseFrom(graphDef)) })
+      .runner()
+      .feed("input", tensor)
+      .fetch("not_activated_output")
+      .run()
 
-    companion object {
-        fun load(file: String): Model {
-            val graphDef = File(file).readBytes()
-            return Model(graphDef)
-        }
+  companion object {
+    fun load(file: String): Model {
+      val graphDef = File(file).readBytes()
+      return Model(graphDef)
     }
-
-    private fun run(session: Session, inputTensor: Tensor<*>): Array<FloatArray> {
-        val result: Tensor<*> = session.runner()
-                .feed("input", inputTensor)
-                .fetch("not_activated_output").run()[0]
-        val outputBuffer = Array(1) { FloatArray(3) }
-        result.copyTo(outputBuffer)
-        return outputBuffer
-    }
+  }
 }
