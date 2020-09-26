@@ -1,11 +1,9 @@
 package dev.tfk
 
-import dev.tfk.models.Model
-
 fun main(args: Array<String>) {
-    val model = Model.load("models/simple.pb")
-    val inputData = arrayOf(arrayOf(4f, 3f, 2f, 1f))
-    val prediction = model.predict(inputData)
-    println("Prediction: $prediction")
-    println(TensorFlow.version())
+  val graph = Graph.fromFile("models/simple.pb")
+  val inputData = arrayOf(arrayOf(4f, 3f, 2f, 1f))
+  val prediction = graph.predict(inputData)
+  println("Prediction: ${prediction?.toList()}")
+  println(TensorFlow.version())
 }
