@@ -10,7 +10,7 @@ plugins {
   application
 
   // Shadow Jar
-  id("com.github.johnrengelman.shadow") version "6.0.0"
+  // id("com.github.johnrengelman.shadow") version "6.0.0"
 
   // Maven publish
   `maven-publish`
@@ -31,10 +31,12 @@ tasks.withType<Test> {
   useJUnitPlatform()
 }
 
-val tensorflowVersion = "0.2.0-SNAPSHOT"
-val libraryVersion = "${tensorflowVersion}-0.1.0-SNAPSHOT"
+val tensorflowVersion = "2.3.0"
+val javaSigVersion = "0.2.0"
+val libraryVersion = "0.1.0"
+val fullVersionString = "$tensorflowVersion-$libraryVersion-SNAPSHOT"
 group = "dev.tfk"
-version = libraryVersion
+version = fullVersionString
 
 repositories {
   // Use jcenter for resolving your dependencies.
@@ -52,9 +54,9 @@ dependencies {
   testImplementation("io.kotest:kotest-runner-junit5-jvm:4.0.5")
 
   // Java TensorFlow API
-  implementation("org.tensorflow:tensorflow-core-platform:$tensorflowVersion")
-  implementation("org.tensorflow:tensorflow-framework:$tensorflowVersion")
-  implementation("org.tensorflow:ndarray:$tensorflowVersion")
+  implementation("org.tensorflow:tensorflow-core-platform:$javaSigVersion-SNAPSHOT")
+  implementation("org.tensorflow:tensorflow-framework:$javaSigVersion-SNAPSHOT")
+  implementation("org.tensorflow:ndarray:$javaSigVersion-SNAPSHOT")
 
 //    // Java library for HDF5 files. Used for writing models to file.
 //    implementation("cisd:jhdf5:14.12.6")
@@ -79,7 +81,7 @@ publishing {
       from(components["java"])
       groupId = "dev.tfk"
       artifactId = "tensorflow-kotlin"
-      version = libraryVersion
+      version = fullVersionString
     }
   }
 }
@@ -111,7 +113,7 @@ bintray {
     setLicenses("MIT")
     vcsUrl = "https://github.com/TensorFlow-Kotlin/tensorflow-kotlin.git"
     version.apply {
-      name = libraryVersion
+      name = fullVersionString
     }
   }
 }
