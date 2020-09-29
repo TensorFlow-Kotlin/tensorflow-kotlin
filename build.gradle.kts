@@ -5,6 +5,7 @@ import groovy.lang.*
 plugins {
   // Apply the Kotlin JVM plugin to add support for Kotlin on the JVM.
   id("org.jetbrains.kotlin.jvm")
+  id("org.bytedeco.gradle-javacpp-platform") version "1.5.4"
 
   // Apply the application plugin to add support for building a CLI application.
   application
@@ -31,7 +32,7 @@ tasks.withType<Test> {
   useJUnitPlatform()
 }
 
-val tensorflowVersion = "2.3.0"
+val tensorflowVersion = "2.3.1"
 val javaSigVersion = "0.2.0"
 val libraryVersion = "0.1.0"
 val fullVersionString = "$tensorflowVersion-$libraryVersion-SNAPSHOT"
@@ -54,9 +55,9 @@ dependencies {
   testImplementation("io.kotest:kotest-runner-junit5-jvm:4.0.5")
 
   // Java TensorFlow API
+  implementation("org.tensorflow:ndarray:$javaSigVersion-SNAPSHOT")
   implementation("org.tensorflow:tensorflow-core-platform:$javaSigVersion-SNAPSHOT")
   implementation("org.tensorflow:tensorflow-framework:$javaSigVersion-SNAPSHOT")
-  implementation("org.tensorflow:ndarray:$javaSigVersion-SNAPSHOT")
 
 //    // Java library for HDF5 files. Used for writing models to file.
 //    implementation("cisd:jhdf5:14.12.6")
