@@ -55,9 +55,9 @@ dependencies {
   testImplementation("io.kotest:kotest-runner-junit5-jvm:4.0.5")
 
   // Java TensorFlow API
-  implementation("org.tensorflow:ndarray:$javaSigVersion-SNAPSHOT")
-  implementation("org.tensorflow:tensorflow-core-platform:$javaSigVersion-SNAPSHOT")
-  implementation("org.tensorflow:tensorflow-framework:$javaSigVersion-SNAPSHOT")
+  implementation("org.tensorflow:ndarray:$javaSigVersion")
+  implementation("org.tensorflow:tensorflow-core-platform:$javaSigVersion")
+  implementation("org.tensorflow:tensorflow-framework:$javaSigVersion")
 
 //    // Java library for HDF5 files. Used for writing models to file.
 //    implementation("cisd:jhdf5:14.12.6")
