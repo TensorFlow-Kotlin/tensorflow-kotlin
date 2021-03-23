@@ -19,7 +19,7 @@ version = "1.0"
 dependencies {
     compileOnly(gradleApi())
     implementation("com.squareup.okhttp3:okhttp:4.2.2")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.61")
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10")
 }
 
 gradlePlugin {

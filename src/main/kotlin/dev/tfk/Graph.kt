@@ -16,9 +16,9 @@ fun Graph.predict(inputData: Array<Array<Float>>): Array<Float>? {
     .run()
     .first()!!
   return arrayOf(
-    outputTensor.rawData().asFloats().getFloat(0),
-    outputTensor.rawData().asFloats().getFloat(1),
-    outputTensor.rawData().asFloats().getFloat(2)
+    outputTensor.asRawTensor().data().asFloats().getFloat(0),
+    outputTensor.asRawTensor().data().asFloats().getFloat(1),
+    outputTensor.asRawTensor().data().asFloats().getFloat(2)
   )
 }
 

@@ -3,24 +3,18 @@ import org.jfrog.gradle.plugin.artifactory.dsl.*
 import groovy.lang.*
 
 plugins {
-  // Apply the Kotlin JVM plugin to add support for Kotlin on the JVM.
   id("org.jetbrains.kotlin.jvm")
   id("org.bytedeco.gradle-javacpp-platform") version "1.5.4"
 
-  // Apply the application plugin to add support for building a CLI application.
   application
 
-  // Shadow Jar
   // id("com.github.johnrengelman.shadow") version "6.0.0"
 
-  // Maven publish
   `maven-publish`
 
-  // Bintray
   id("com.jfrog.bintray") version "1.8.4"
   id("com.jfrog.artifactory") version "4.15.2"
 
-  // model downloader
   id("model-downloader-plugin")
 }
 
@@ -33,15 +27,13 @@ tasks.withType<Test> {
 }
 
 val tensorflowVersion = "2.3.1"
-val javaSigVersion = "0.2.0"
+val javaSigVersion = "0.3.0"
 val libraryVersion = "0.1.0"
 val fullVersionString = "$tensorflowVersion-$libraryVersion-SNAPSHOT"
 group = "dev.tfk"
 version = fullVersionString
 
 repositories {
-  // Use jcenter for resolving your dependencies.
-  // You can declare any Maven/Ivy/file repository here.
   jcenter()
   mavenCentral()
   maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
@@ -52,12 +44,11 @@ dependencies {
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
   // Kotest
-  testImplementation("io.kotest:kotest-runner-junit5-jvm:4.0.5")
+  testImplementation("io.kotest:kotest-runner-junit5-jvm:4.4.3")
 
   // Java TensorFlow API
-  implementation("org.tensorflow:ndarray:$javaSigVersion-SNAPSHOT")
-  implementation("org.tensorflow:tensorflow-core-platform:$javaSigVersion-SNAPSHOT")
-  implementation("org.tensorflow:tensorflow-framework:$javaSigVersion-SNAPSHOT")
+  implementation("org.tensorflow:ndarray:$javaSigVersion")
+  implementation("org.tensorflow:tensorflow-core-platform:$javaSigVersion")
 
 //    // Java library for HDF5 files. Used for writing models to file.
 //    implementation("cisd:jhdf5:14.12.6")
@@ -97,7 +88,7 @@ artifactory {
       setProperty("maven", true)
     })
     defaults(delegateClosureOf<GroovyObject> {
-      invokeMethod("publications", publishing.publications.names.toTypedArray())
+      invokeMethod("publications", "java")
       setProperty("publishArtifacts", true)
       setProperty("publishPom", true)
     })
